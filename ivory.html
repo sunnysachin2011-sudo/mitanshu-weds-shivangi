@@ -158,13 +158,10 @@ html[data-l="en"] .hosts{font-family:var(--f-en); font-weight:600; font-size:1.3
 html[data-l="en"] .sang{font-family:var(--f-script); font-size:2.1rem}
 .shlok{color:var(--gold-hi); font-family:var(--f-hi); font-weight:600; font-size:1rem; line-height:2; text-wrap:balance}
 
-/* ---------- scratch + countdown ---------- */
-.scratch{--tx:var(--ink); position:relative; width:min(100%,330px); height:136px; border-radius:10px; overflow:hidden; border:1px solid var(--gold-hi); box-shadow:0 0 0 4px var(--maroon-deep), 0 0 0 5px var(--gold); background:var(--ivory); color:var(--ink); display:grid; place-items:center}
-.scratch .under{display:flex; flex-direction:column; gap:2px; padding:8px}
-.scratch .under b{font-family:var(--f-hi-display); font-weight:400; font-size:1.75rem; color:var(--sindoor); line-height:1.4}
-html[data-l="en"] .scratch .under b{font-family:var(--f-en-display); font-weight:600; font-size:1.45rem}
-.scratch canvas{position:absolute; inset:0; width:100%; height:100%; touch-action:none; cursor:grab; transition:opacity .6s}
-.scratch.done canvas{opacity:0; pointer-events:none}
+/* ---------- date + countdown ---------- */
+.dateplate{width:min(100%,330px); padding:20px 12px 18px; border-radius:10px; border:1px solid var(--gold-hi); box-shadow:0 0 0 4px var(--ring), 0 0 0 5px var(--gold); background:var(--ivory); color:var(--ink); display:flex; flex-direction:column; gap:2px}
+.dateplate b{font-family:var(--f-hi-display); font-weight:400; font-size:1.9rem; color:var(--sindoor); line-height:1.4}
+html[data-l="en"] .dateplate b{font-family:var(--f-en-display); font-weight:600; font-size:1.5rem}
 .linkbtn{background:none; border:0; border-bottom:1px solid var(--gold); padding:2px 0; color:var(--gold-hi); font-size:.92rem; text-decoration:none}
 html[data-l="en"] .linkbtn{font-style:italic}
 .count{display:flex; gap:10px; justify-content:center; font-variant-numeric:tabular-nums}
@@ -309,7 +306,7 @@ html[data-skin="ivory"] .toran{background-color:var(--maroon)}
 html[data-skin="ivory"] .mandala{opacity:.3; background:repeating-conic-gradient(var(--gold) 0 1.6deg, transparent 1.6deg 11.25deg)}
 html[data-skin="ivory"] .arch, html[data-skin="ivory"] .story{border-color:var(--gold); box-shadow:0 0 0 5px var(--maroon-hi), 0 0 0 6px var(--gold), 0 22px 34px -16px rgba(90,60,10,.6)}
 html[data-skin="ivory"] .frame{background-color:#fffdf6; box-shadow:inset 0 0 0 5px #fffdf6, inset 0 0 0 6px rgba(138,98,22,.6), 0 20px 34px -20px rgba(90,60,10,.55)}
-html[data-skin="ivory"] .scratch{box-shadow:0 0 0 4px var(--maroon-hi), 0 0 0 5px var(--gold)}
+html[data-skin="ivory"] .dateplate{background:#fffdf6}
 html[data-skin="ivory"] .count div{background:#fffdf6}
 html[data-skin="ivory"] .reelnav button{background:#fffdf6}
 html[data-skin="ivory"] .dots i.on{background:var(--gold-deep)}
@@ -437,16 +434,11 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
 
   <!-- ============ date ============ -->
   <section class="sec tight" id="date">
-    <h2><span class="hi">शुभ तिथि</span><span class="en">The date</span></h2>
-    <p class="soft small"><span class="hi">✦ तिथि देखने के लिए सुनहरी परत खुरचें ✦</span><span class="en">✦ Scratch the gold to reveal the date ✦</span></p>
-    <div class="scratch" id="scratch">
-      <div class="under">
-        <b><span class="hi">11 दिसम्बर 2026</span><span class="en">11 December 2026</span></b>
-        <span><span class="hi">शुक्रवार · फेरे सायं 4:00 बजे</span><span class="en">Friday · Phere at 4:00 pm</span></span>
-      </div>
-      <canvas id="foil" aria-hidden="true"></canvas>
+    <h2><span class="hi">शुभ तिथि</span><span class="en">Save the date</span></h2>
+    <div class="dateplate">
+      <b><span class="hi">11 दिसम्बर 2026</span><span class="en">11 December 2026</span></b>
+      <span><span class="hi">शुक्रवार · फेरे सायं 4:00 बजे</span><span class="en">Friday · Phere at 4:00 pm</span></span>
     </div>
-    <button class="linkbtn" id="reveal"><span class="hi">तिथि दिखाएँ</span><span class="en">Show the date</span></button>
     <a class="linkbtn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mitanshu%20weds%20Shivangi&dates=20261211T103000Z/20261211T173000Z&location=JK%20Farm%20House%2C%20Hathras%20Road%2C%20Iglas%2C%20Uttar%20Pradesh&details=Phere%204%3A00%20pm%20%C2%B7%20Preetibhoj%20from%207%3A00%20pm%20%C2%B7%20Jaimala%209%3A00%20pm"><span class="hi">Google कैलेंडर में जोड़ें</span><span class="en">Add to Google Calendar</span></a>
     <div class="rule"></div>
     <div class="count" id="count" aria-live="off">
@@ -616,7 +608,7 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
   /* language */
   var lang='hi';
   try{ lang=localStorage.getItem('lang')||'hi' }catch(e){}
-  function setLang(l){ lang=l; root.setAttribute('data-l',l); $('lang').textContent=(l==='hi'?'EN':'हिं'); try{localStorage.setItem('lang',l)}catch(e){} drawFoil() }
+  function setLang(l){ lang=l; root.setAttribute('data-l',l); $('lang').textContent=(l==='hi'?'EN':'हिं'); try{localStorage.setItem('lang',l)}catch(e){} }
   $('lang').addEventListener('click',function(){ setLang(lang==='hi'?'en':'hi') });
 
   /* colours: maroon (default) or ivory. "#ivory" in the link opens the ivory look. */
@@ -732,40 +724,6 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
     if(d===0){ $('countnote').innerHTML='<span class="hi">शुभ विवाह की घड़ी आ गई है</span><span class="en">The wedding hour is here</span>' }
   }
   tick(); setInterval(tick,1000);
-
-  /* scratch foil */
-  var sc=$('scratch'), cv=$('foil'), cx=cv.getContext('2d'), moves=0;
-  function drawFoil(){
-    if(sc.classList.contains('done'))return;
-    var r=sc.getBoundingClientRect(), k=Math.min(window.devicePixelRatio||1,2);
-    if(!r.width)return;
-    cv.width=r.width*k; cv.height=r.height*k; cx.setTransform(k,0,0,k,0,0);
-    var g=cx.createLinearGradient(0,0,r.width,r.height);
-    g.addColorStop(0,'#8a6216'); g.addColorStop(.35,'#e9cb7a'); g.addColorStop(.55,'#b8892b'); g.addColorStop(.8,'#f3dfa0'); g.addColorStop(1,'#8a6216');
-    cx.globalCompositeOperation='source-over'; cx.fillStyle=g; cx.fillRect(0,0,r.width,r.height);
-    cx.fillStyle='rgba(109,5,11,.16)';
-    for(var y=10;y<r.height;y+=20)for(var x=(y/20%2?10:20);x<r.width;x+=20){ cx.beginPath(); cx.arc(x,y,2,0,7); cx.fill() }
-    cx.fillStyle='#6d050b'; cx.textAlign='center'; cx.textBaseline='middle';
-    cx.font=(lang==='hi'?'22px "Yatra One","Nirmala UI",serif':'600 17px "Cinzel",Georgia,serif');
-    cx.fillText(lang==='hi'?'यहाँ खुरचें':'SCRATCH HERE',r.width/2,r.height/2);
-  }
-  function finish(){ sc.classList.add('done'); $('reveal').hidden=true }
-  function rub(e){
-    var r=cv.getBoundingClientRect();
-    cx.globalCompositeOperation='destination-out'; cx.beginPath(); cx.arc(e.clientX-r.left,e.clientY-r.top,24,0,7); cx.fill();
-    if(++moves%12===0){
-      var d=cx.getImageData(0,0,cv.width,cv.height).data, clear=0, n=0;
-      for(var i=3;i<d.length;i+=160){ n++; if(d[i]<40)clear++ }
-      if(clear/n>.45)finish();
-    }
-  }
-  var down=false;
-  cv.addEventListener('pointerdown',function(e){ down=true; try{cv.setPointerCapture(e.pointerId)}catch(x){} rub(e) });
-  cv.addEventListener('pointermove',function(e){ if(down)rub(e) });
-  ['pointerup','pointercancel'].forEach(function(n){ cv.addEventListener(n,function(){ down=false }) });
-  $('reveal').addEventListener('click',finish);
-  window.addEventListener('resize',drawFoil);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drawFoil);
 
   /* printed cards */
   var box=$('box');
