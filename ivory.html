@@ -58,8 +58,8 @@ button{font:inherit; color:inherit; cursor:pointer}
     linear-gradient(180deg,#fff3c4 0%,var(--gold-hi) 28%,var(--gold) 62%,var(--gold-deep) 100%);
   background-size:260% 100%,100% 100%; background-position:130% 0,0 0; background-repeat:no-repeat;
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  animation:sheen 6s ease-in-out infinite;
 }
+.names b{animation:sheen 6s ease-in-out infinite}
 @keyframes sheen{0%,50%{background-position:130% 0,0 0}100%{background-position:-60% 0,0 0}}
 
 /* ---------- the maroon column ---------- */
@@ -67,12 +67,11 @@ button{font:inherit; color:inherit; cursor:pointer}
   position:relative; max-width:480px; margin:0 auto; overflow:hidden;
   background-color:var(--maroon);
   background-image:
-    radial-gradient(circle, transparent 9px, rgba(243,221,154,.11) 10px, transparent 11.5px),
-    radial-gradient(circle, rgba(243,221,154,.2) 0 1.4px, transparent 2.2px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Ccircle cx='17' cy='17' r='10' fill='none' stroke='%23f3dd9a' stroke-opacity='.11' stroke-width='1.5'/%3E%3Cg fill='%23f3dd9a' fill-opacity='.2'%3E%3Ccircle r='1.8'/%3E%3Ccircle cx='34' r='1.8'/%3E%3Ccircle cy='34' r='1.8'/%3E%3Ccircle cx='34' cy='34' r='1.8'/%3E%3C/g%3E%3C/svg%3E"),
     radial-gradient(90% 520px at 50% 0, rgba(140,36,50,.9), transparent 70%),
     linear-gradient(180deg, var(--maroon) 0, var(--maroon-deep) 100%);
-  background-size:34px 34px, 34px 34px, 100% 100%, 100% 100%;
-  background-position:0 0, 17px 17px, 0 0, 0 0;
+  background-size:34px 34px, 100% 760px, 100% 100%;
+  background-repeat:repeat, no-repeat, no-repeat;
   border-inline:1px solid rgba(202,163,73,.55);
   box-shadow:0 0 70px rgba(0,0,0,.7);
 }
@@ -277,7 +276,7 @@ html[data-l="en"] .quote h3{font-family:var(--f-en-display); font-weight:600; le
 .fab button{width:48px; height:48px; border-radius:50%; border:1px solid var(--gold-hi); background:linear-gradient(140deg,var(--gold-deep),var(--gold)); color:var(--maroon-deep); font-size:1rem; display:grid; place-items:center; box-shadow:0 8px 18px rgba(0,0,0,.6); font-family:var(--f-en); font-weight:600}
 .fab #lang{background:var(--ivory); color:var(--sindoor); width:42px; height:42px; font-size:.9rem}
 .fab svg{width:18px; height:18px; fill:currentColor}
-#petals{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:30}
+#petals{position:fixed; top:0; left:50%; width:min(100vw,480px); height:100%; transform:translateX(-50%); pointer-events:none; z-index:30}
 .fab #cast{width:42px; height:42px; background:var(--ivory); color:var(--sindoor)}
 .fab #cast svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.6}
 .fab #skin{width:42px; height:42px; padding:0; background:linear-gradient(135deg,#fbf5e6 0 50%,#4b0f19 50% 100%)}
@@ -291,8 +290,7 @@ html[data-skin="ivory"]{
 html[data-skin="ivory"] body{background:#e9dab6}
 html[data-skin="ivory"] .sheet{
   background-image:
-    radial-gradient(circle, transparent 9px, rgba(138,98,22,.13) 10px, transparent 11.5px),
-    radial-gradient(circle, rgba(138,98,22,.22) 0 1.4px, transparent 2.2px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Ccircle cx='17' cy='17' r='10' fill='none' stroke='%238a6216' stroke-opacity='.13' stroke-width='1.5'/%3E%3Cg fill='%238a6216' fill-opacity='.22'%3E%3Ccircle r='1.8'/%3E%3Ccircle cx='34' r='1.8'/%3E%3Ccircle cy='34' r='1.8'/%3E%3Ccircle cx='34' cy='34' r='1.8'/%3E%3C/g%3E%3C/svg%3E"),
     radial-gradient(90% 520px at 50% 0, rgba(255,255,255,.95), transparent 70%),
     linear-gradient(180deg, var(--maroon) 0, var(--maroon-deep) 100%);
   border-inline-color:var(--gold); box-shadow:0 0 50px rgba(90,60,10,.35)}
@@ -334,12 +332,8 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
 .js .rv.zoom{transform:scale(.82)}
 .js .rv.unfurl{transform:scaleX(.12)}
 .js .rv.in{opacity:1; transform:none}
-.hero .arch{animation:halo 4.5s ease-in-out infinite}
-@keyframes halo{
-  0%,100%{box-shadow:0 0 0 5px var(--ring), 0 0 0 6px var(--gold), 0 0 0 0 rgba(243,221,154,0), 0 24px 40px -14px rgba(0,0,0,.6)}
-  50%{box-shadow:0 0 0 5px var(--ring), 0 0 0 6px var(--gold), 0 0 34px 6px rgba(243,221,154,.55), 0 24px 40px -14px rgba(0,0,0,.6)}}
-.ribbon.gold, .btn{background-size:230% 100%; animation:slide 7s ease-in-out infinite}
-@keyframes slide{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+.hero .arch{box-shadow:0 0 0 5px var(--ring), 0 0 0 6px var(--gold), 0 0 30px 4px rgba(243,221,154,.35), 0 24px 40px -14px rgba(0,0,0,.6)}
+.mandala{will-change:transform}
 .scrollcue::after{animation:drop 1.8s ease-in-out infinite}
 @keyframes drop{0%{transform:scaleY(0); transform-origin:top}50%{transform:scaleY(1); transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0); transform-origin:bottom}}
 .count div{overflow:hidden}
@@ -347,8 +341,6 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
 .count b.tick{animation:tick .5s cubic-bezier(.2,.8,.2,1)}
 @keyframes tick{from{transform:translateY(-55%); opacity:0}to{transform:none; opacity:1}}
 .story{will-change:transform}
-.story video{transition:transform 7s ease-out}
-.story.on video{transform:scale(1.08)}
 .gate .seal{position:relative}
 .gate .seal::before{content:""; position:absolute; inset:-34px; border-radius:50%; pointer-events:none;
   background:repeating-conic-gradient(var(--gold-hi) 0 2deg, transparent 2deg 12deg);
@@ -626,7 +618,7 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
       if(!m||GL.indexOf(m[1])<0)return;
       var base='assets/'+(on?'g-':'')+m[1], was=!v.paused;
       v.setAttribute('poster',base+'.jpg'); v.setAttribute('src',base+'.mp4'); v.load();
-      if(was){ var q=v.play(); if(q&&q.catch)q.catch(function(){}) }
+      if(was)later();
     });
     $('cast').style.opacity=on?'1':'.7';
   }
@@ -685,13 +677,22 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
   $('open').addEventListener('click',function(){ openGate(true) });
   $('skip').addEventListener('click',function(e){ e.preventDefault(); openGate(false) });
 
-  /* clips play only while on screen */
-  var vids=[].slice.call(document.querySelectorAll('video'));
+  /* clips: only the ones on screen play, and a clip starts only when the scroll stops, so the scroll stays smooth */
+  var vids=[].slice.call(document.querySelectorAll('video')), idle=0;
+  function mayPlay(v){ var st=v.closest?v.closest('.story'):null; return v._want && (!st || st.classList.contains('on')) }
+  function playWanted(){
+    vids.forEach(function(v){
+      if(mayPlay(v)){ if(v.paused){ var q=v.play(); if(q&&q.catch)q.catch(function(){}) } }
+      else if(!v.paused)v.pause();
+    });
+  }
+  function later(){ clearTimeout(idle); idle=setTimeout(playWanted,170) }
   if('IntersectionObserver' in window && !calm){
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){
-      if(e.isIntersecting){ var p=e.target.play(); if(p&&p.catch)p.catch(function(){}) } else e.target.pause();
-    }) },{threshold:.3});
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.target._want=e.isIntersecting; if(!e.isIntersecting)e.target.pause() }); later();
+    },{threshold:.45});
     vids.forEach(function(v){ io.observe(v) });
+    window.addEventListener('scroll',later,{passive:true});
   }
 
   /* story cards */
@@ -708,7 +709,7 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
       if(!calm)st.style.transform='perspective(900px) rotateY('+(-d*16).toFixed(2)+'deg) scale('+(1-a*0.1).toFixed(3)+')';
       st.classList.toggle('on',i===cur);
     });
-    mark(cur);
+    mark(cur); later();
   }
   var rq=0; reel.addEventListener('scroll',function(){ if(!rq)rq=requestAnimationFrame(function(){ rq=0; flow() }) },{passive:true});
   window.addEventListener('resize',flow); flow();
@@ -749,26 +750,29 @@ html[data-skin="ivory"]{--ring:var(--maroon-hi)}
   function startPetals(burst){
     if(started||calm)return; started=true;
     var c=$('petals'), x=c.getContext('2d'), W,H,k=Math.min(window.devicePixelRatio||1,1.5), P=[], D=[], B=[], cols=['#f08c17','#fcdc43','#c2182b','#e8627a'];
-    function size(){ W=innerWidth; H=innerHeight; c.width=W*k; c.height=H*k; x.setTransform(k,0,0,k,0,0) }
+    function size(){ W=Math.min(innerWidth,480); H=innerHeight; c.width=W*k; c.height=H*k; x.setTransform(k,0,0,k,0,0) }
     size(); addEventListener('resize',size);
-    function lane(){ var w=Math.min(W,480); return (W-w)/2+Math.random()*w }
+    function lane(){ return Math.random()*W }
     for(var i=0;i<14;i++)P.push({x:lane(),y:Math.random()*-innerHeight,r:4+Math.random()*4,v:.35+Math.random()*.6,a:Math.random()*6,w:.01+Math.random()*.02,c:cols[i%4]});
     for(i=0;i<18;i++)D.push({x:lane(),y:Math.random()*innerHeight,r:.8+Math.random()*1.6,v:.12+Math.random()*.3,a:Math.random()*6,w:.02+Math.random()*.03});
     if(burst)for(i=0;i<90;i++){ var an=Math.random()*6.283, sp=2+Math.random()*7; B.push({x:W/2,y:H/2,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp-1.5,r:1+Math.random()*2.6,l:1,f:.012+Math.random()*.014}) }
     var last=0;
     (function loop(now){
-      var dt=Math.min(((now||0)-last)/16.7,6)||1; last=now||0;
+      now=now||0;
+      /* petals and dust move slowly, so 30 pictures a second are enough; the burst runs at full rate */
+      if(!B.length && now-last<31){ requestAnimationFrame(loop); return }
+      var dt=Math.min((now-last)/16.7,6)||1; last=now;
       if(!document.hidden){
         x.clearRect(0,0,W,H);
         P.forEach(function(p){
-          p.y+=p.v; p.a+=p.w; p.x+=Math.sin(p.a)*.5;
+          p.y+=p.v*dt; p.a+=p.w*dt; p.x+=Math.sin(p.a)*.5*dt;
           if(p.y>H+12){ p.y=-12; p.x=lane() }
           x.save(); x.translate(p.x,p.y); x.rotate(p.a); x.globalAlpha=.75; x.fillStyle=p.c;
           x.beginPath(); x.ellipse(0,0,p.r,p.r*.55,0,0,7); x.fill(); x.restore();
         });
         x.fillStyle='#f3dd9a';
         D.forEach(function(d){
-          d.y-=d.v; d.a+=d.w; d.x+=Math.sin(d.a)*.25;
+          d.y-=d.v*dt; d.a+=d.w*dt; d.x+=Math.sin(d.a)*.25*dt;
           if(d.y<-6){ d.y=H+6; d.x=lane() }
           x.globalAlpha=.25+.55*Math.abs(Math.sin(d.a*1.7)); x.beginPath(); x.arc(d.x,d.y,d.r,0,7); x.fill();
         });
