@@ -54,9 +54,13 @@ button{font:inherit; color:inherit; cursor:pointer}
 .what span, h2 span, .names b, .place span{
   -webkit-box-decoration-break:clone; box-decoration-break:clone;
   color:var(--gold-hi);
-  background:linear-gradient(180deg,#fff3c4 0%,var(--gold-hi) 28%,var(--gold) 62%,var(--gold-deep) 100%);
+  background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),
+    linear-gradient(180deg,#fff3c4 0%,var(--gold-hi) 28%,var(--gold) 62%,var(--gold-deep) 100%);
+  background-size:260% 100%,100% 100%; background-position:130% 0,0 0; background-repeat:no-repeat;
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  animation:sheen 6s ease-in-out infinite;
 }
+@keyframes sheen{0%,50%{background-position:130% 0,0 0}100%{background-position:-60% 0,0 0}}
 
 /* ---------- the maroon column ---------- */
 .sheet{
@@ -236,7 +240,7 @@ html[data-l="en"] .quote h3{font-family:var(--f-en-display); font-weight:600; le
 .phone{display:flex; align-items:center; gap:12px; border:1px solid var(--gold-hi); border-radius:999px; padding:6px 8px 6px 22px; background:var(--ivory); color:var(--ink)}
 .phone a{font-family:var(--f-en-display); font-weight:600; font-size:1.2rem; letter-spacing:.08em; text-decoration:none; font-variant-numeric:tabular-nums; user-select:all}
 .phone button{border:0; border-radius:999px; background:var(--sindoor); color:#fff; font-size:.8rem; padding:.5em 1em; min-width:74px}
-.end{overflow:hidden; padding-bottom:calc(110px + env(safe-area-inset-bottom,0px)); background:linear-gradient(180deg,transparent,rgba(0,0,0,.45))}
+.end{overflow:hidden; padding-bottom:calc(250px + env(safe-area-inset-bottom,0px)); background:linear-gradient(180deg,transparent,rgba(0,0,0,.45))}
 .end .mandala{top:-170px}
 .end > *:not(.mandala){position:relative}
 .end .names .hi b{font-size:2.5rem}
@@ -277,6 +281,8 @@ html[data-l="en"] .quote h3{font-family:var(--f-en-display); font-weight:600; le
 .fab #lang{background:var(--ivory); color:var(--sindoor); width:42px; height:42px; font-size:.9rem}
 .fab svg{width:18px; height:18px; fill:currentColor}
 #petals{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:30}
+.fab #cast{width:42px; height:42px; background:var(--ivory); color:var(--sindoor)}
+.fab #cast svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.6}
 .fab #skin{width:42px; height:42px; padding:0; background:linear-gradient(135deg,#fbf5e6 0 50%,#4b0f19 50% 100%)}
 
 /* ---------- second look: ivory and gold (html[data-skin="ivory"]) ---------- */
@@ -294,7 +300,8 @@ html[data-skin="ivory"] .sheet{
     linear-gradient(180deg, var(--maroon) 0, var(--maroon-deep) 100%);
   border-inline-color:var(--gold); box-shadow:0 0 50px rgba(90,60,10,.35)}
 html[data-skin="ivory"] h2 span, html[data-skin="ivory"] .names b, html[data-skin="ivory"] .place span{
-  color:var(--gold-deep); background-image:linear-gradient(180deg,#c9982e 0%,#9a6f17 45%,#6a4a0b 100%)}
+  color:var(--gold-deep); background-image:linear-gradient(105deg,transparent 42%,rgba(255,244,200,.95) 50%,transparent 58%),
+    linear-gradient(180deg,#c9982e 0%,#9a6f17 45%,#6a4a0b 100%)}
 html[data-skin="ivory"] .hero-title, html[data-skin="ivory"] .shlok, html[data-skin="ivory"] .linkbtn,
 html[data-skin="ivory"] .count b, html[data-skin="ivory"] .reelnav button{color:var(--gold-deep)}
 html[data-skin="ivory"] .names i{color:var(--sindoor)}
@@ -323,9 +330,40 @@ html[data-skin="ivory"] .gate-in .who, html[data-skin="ivory"] .gate-in .hint{co
 html[data-skin="ivory"] .gate-in .skip{color:var(--gold-deep)}
 html[data-skin="ivory"] .fab #skin{background:linear-gradient(135deg,#4b0f19 0 50%,#fbf5e6 50% 100%)}
 
+/* ---------- motion ---------- */
+:root{--ring:var(--maroon-deep)}
+html[data-skin="ivory"]{--ring:var(--maroon-hi)}
+.js .rv{opacity:0; transform:translateY(28px); transition:opacity .95s cubic-bezier(.2,.7,.2,1), transform .95s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d,0s)}
+.js .rv.zoom{transform:scale(.82)}
+.js .rv.unfurl{transform:scaleX(.12)}
+.js .rv.in{opacity:1; transform:none}
+.hero .arch{animation:halo 4.5s ease-in-out infinite}
+@keyframes halo{
+  0%,100%{box-shadow:0 0 0 5px var(--ring), 0 0 0 6px var(--gold), 0 0 0 0 rgba(243,221,154,0), 0 24px 40px -14px rgba(0,0,0,.6)}
+  50%{box-shadow:0 0 0 5px var(--ring), 0 0 0 6px var(--gold), 0 0 34px 6px rgba(243,221,154,.55), 0 24px 40px -14px rgba(0,0,0,.6)}}
+.ribbon.gold, .btn{background-size:230% 100%; animation:slide 7s ease-in-out infinite}
+@keyframes slide{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+.scrollcue::after{animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0); transform-origin:top}50%{transform:scaleY(1); transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0); transform-origin:bottom}}
+.count div{overflow:hidden}
+.count b{display:block}
+.count b.tick{animation:tick .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes tick{from{transform:translateY(-55%); opacity:0}to{transform:none; opacity:1}}
+.story{will-change:transform}
+.story video{transition:transform 7s ease-out}
+.story.on video{transform:scale(1.08)}
+.gate .seal{position:relative}
+.gate .seal::before{content:""; position:absolute; inset:-34px; border-radius:50%; pointer-events:none;
+  background:repeating-conic-gradient(var(--gold-hi) 0 2deg, transparent 2deg 12deg);
+  -webkit-mask:radial-gradient(circle, transparent 0 61%, #000 62% 100%); mask:radial-gradient(circle, transparent 0 61%, #000 62% 100%);
+  opacity:.55; animation:turn 22s linear infinite}
+.gate.open .seal{animation:none; transform:scale(2.4) rotate(50deg); transition:transform .8s cubic-bezier(.5,0,.8,.4)}
+#petals{z-index:55}
+
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
-  .door{transition:none} .gate .seal,.mandala{animation:none} #petals{display:none}
+  .door{transition:none} .gate .seal,.gate .seal::before,.mandala,.hero .arch,.ribbon.gold,.btn,.scrollcue::after{animation:none} #petals{display:none}
+  .what span, h2 span, .names b, .place span{animation:none}
 }
 </style>
 </head>
@@ -351,6 +389,7 @@ html[data-skin="ivory"] .fab #skin{background:linear-gradient(135deg,#4b0f19 0 5
 
 <canvas id="petals" aria-hidden="true"></canvas>
 <div class="fab">
+  <button id="cast" aria-label="Couple with or without glasses"><svg viewBox="0 0 24 24"><circle cx="7" cy="13" r="4"/><circle cx="17" cy="13" r="4"/><path d="M11 13h2M3 12l1.5-5M21 12l-1.5-5"/></svg></button>
   <button id="skin" aria-label="Change colours: maroon or ivory"></button>
   <button id="lang" aria-label="Change language">EN</button>
   <button id="music" aria-label="Play or pause music"><svg viewBox="0 0 20 20" id="ico"><path d="M5 3l12 7-12 7z"/></svg></button>
@@ -586,6 +625,53 @@ html[data-skin="ivory"] .fab #skin{background:linear-gradient(135deg,#4b0f19 0 5
     if(root.getAttribute('data-skin')==='ivory')root.removeAttribute('data-skin'); else root.setAttribute('data-skin','ivory');
   });
 
+  /* couple with glasses: "#glasses" in the link, data-cast on the page, or the button */
+  var GL=['couple','sangeet','phere','jaimala'], glasses=false;
+  function setCast(on){
+    glasses=on;
+    [].forEach.call(document.querySelectorAll('video'),function(v){
+      var src=v.getAttribute('src'), m=src.match(/assets\/(?:g-)?([a-z]+)\.mp4/);
+      if(!m||GL.indexOf(m[1])<0)return;
+      var base='assets/'+(on?'g-':'')+m[1], was=!v.paused;
+      v.setAttribute('poster',base+'.jpg'); v.setAttribute('src',base+'.mp4'); v.load();
+      if(was){ var q=v.play(); if(q&&q.catch)q.catch(function(){}) }
+    });
+    $('cast').style.opacity=on?'1':'.7';
+  }
+  if(root.getAttribute('data-cast')==='glasses'||location.hash==='#glasses')setCast(true); else $('cast').style.opacity='.7';
+  $('cast').addEventListener('click',function(){ setCast(!glasses) });
+
+  /* scroll reveals: content is visible without script; with script it rises in as it enters */
+  var pending=[], rvq=0;
+  if(!calm){
+    root.classList.add('js');
+    [].forEach.call(document.querySelectorAll('.sec, .frame, .card, .fam'),function(par){
+      var n=0;
+      [].forEach.call(par.children,function(c){
+        if(c.classList.contains('mandala')||c.classList.contains('reel')||c.classList.contains('rv'))return;
+        c.classList.add('rv'); c.style.setProperty('--d',Math.min(n++,6)*0.08+'s');
+        if(c.classList.contains('arch'))c.classList.add('zoom');
+        if(c.classList.contains('ribbon'))c.classList.add('unfurl');
+      });
+    });
+  }
+  /* position check on scroll, resize and a slow timer: nothing can stay hidden, also after a jump */
+  function reveal(){
+    rvq=0; var h=window.innerHeight;
+    pending=pending.filter(function(e){
+      var r=e.getBoundingClientRect();
+      if(r.top<h*0.94){ e.classList.add('in'); return false }
+      return true;
+    });
+  }
+  function askReveal(){ if(!rvq&&pending.length)rvq=requestAnimationFrame(reveal) }
+  function startReveal(){
+    pending=[].slice.call(document.querySelectorAll('.rv:not(.in)'));
+    window.addEventListener('scroll',askReveal,{passive:true}); window.addEventListener('resize',askReveal);
+    setInterval(function(){ if(pending.length)reveal() },500);
+    reveal();
+  }
+
   /* music */
   var song=$('song'), PLAY='<path d="M5 3l12 7-12 7z"/>', PAUSE='<path d="M4 3h4v14H4zM12 3h4v14h-4z"/>';
   function icon(){ $('ico').innerHTML=song.paused?PLAY:PAUSE }
@@ -600,7 +686,9 @@ html[data-skin="ivory"] .fab #skin{background:linear-gradient(135deg,#4b0f19 0 5
     if(gate.classList.contains('open'))return;
     gate.classList.add('open'); document.body.classList.remove('locked');
     if(withMusic){ song.volume=.7; play() }
-    setTimeout(function(){ gate.hidden=true; startPetals() }, calm?0:1750);
+    startPetals(true);
+    setTimeout(startReveal, calm?0:650);
+    setTimeout(function(){ gate.hidden=true }, calm?0:1750);
   }
   $('open').addEventListener('click',function(){ openGate(true) });
   $('skip').addEventListener('click',function(e){ e.preventDefault(); openGate(false) });
@@ -620,16 +708,27 @@ html[data-skin="ivory"] .fab #skin{background:linear-gradient(135deg,#4b0f19 0 5
   function mark(n){ [].forEach.call(dots.children,function(d,i){ d.className=(i===n?'on':'') }) }
   mark(0);
   function current(){ var c=reel.scrollLeft+reel.clientWidth/2, best=0, gap=1e9; stories.forEach(function(s,i){ var g=Math.abs(s.offsetLeft-reel.offsetLeft+s.offsetWidth/2-c); if(g<gap){gap=g;best=i} }); return best }
-  var rt; reel.addEventListener('scroll',function(){ clearTimeout(rt); rt=setTimeout(function(){ mark(current()) },60) },{passive:true});
+  /* the cards turn a little as they pass the centre */
+  function flow(){
+    var c=reel.scrollLeft+reel.clientWidth/2, cur=current();
+    stories.forEach(function(st,i){
+      var d=(st.offsetLeft-reel.offsetLeft+st.offsetWidth/2-c)/st.offsetWidth, a=Math.min(Math.abs(d),1);
+      if(!calm)st.style.transform='perspective(900px) rotateY('+(-d*16).toFixed(2)+'deg) scale('+(1-a*0.1).toFixed(3)+')';
+      st.classList.toggle('on',i===cur);
+    });
+    mark(cur);
+  }
+  var rq=0; reel.addEventListener('scroll',function(){ if(!rq)rq=requestAnimationFrame(function(){ rq=0; flow() }) },{passive:true});
+  window.addEventListener('resize',flow); flow();
   function step(d){ var n=Math.max(0,Math.min(stories.length-1,current()+d)), s=stories[n]; reel.scrollTo({left:s.offsetLeft-reel.offsetLeft-(reel.clientWidth-s.offsetWidth)/2, behavior:calm?'auto':'smooth'}) }
   $('prev').addEventListener('click',function(){ step(-1) }); $('next').addEventListener('click',function(){ step(1) });
 
   /* countdown to the phere: 11 Dec 2026, 4:00 pm IST */
   var T=Date.UTC(2026,11,11,10,30,0);
+  function put(id,v){ var e=$(id); v=String(v); if(e.textContent===v)return; e.textContent=v; if(!calm){ e.classList.remove('tick'); void e.offsetWidth; e.classList.add('tick') } }
   function tick(){
     var d=Math.max(0,T-Date.now()), s=Math.floor(d/1000);
-    $('cd').textContent=Math.floor(s/86400); $('ch').textContent=Math.floor(s%86400/3600);
-    $('cm').textContent=Math.floor(s%3600/60); $('cs').textContent=s%60;
+    put('cd',Math.floor(s/86400)); put('ch',Math.floor(s%86400/3600)); put('cm',Math.floor(s%3600/60)); put('cs',s%60);
     if(d===0){ $('countnote').innerHTML='<span class="hi">शुभ विवाह की घड़ी आ गई है</span><span class="en">The wedding hour is here</span>' }
   }
   tick(); setInterval(tick,1000);
@@ -687,16 +786,20 @@ html[data-skin="ivory"] .fab #skin{background:linear-gradient(135deg,#4b0f19 0 5
     });
   });
 
-  /* marigold and rose petals */
+  /* petals, drifting gold dust, and a gold burst when the doors open */
   var started=false;
-  function startPetals(){
+  function startPetals(burst){
     if(started||calm)return; started=true;
-    var c=$('petals'), x=c.getContext('2d'), W,H,k=Math.min(window.devicePixelRatio||1,1.5), P=[], cols=['#f08c17','#fcdc43','#c2182b','#e8627a'];
+    var c=$('petals'), x=c.getContext('2d'), W,H,k=Math.min(window.devicePixelRatio||1,1.5), P=[], D=[], B=[], cols=['#f08c17','#fcdc43','#c2182b','#e8627a'];
     function size(){ W=innerWidth; H=innerHeight; c.width=W*k; c.height=H*k; x.setTransform(k,0,0,k,0,0) }
     size(); addEventListener('resize',size);
     function lane(){ var w=Math.min(W,480); return (W-w)/2+Math.random()*w }
     for(var i=0;i<14;i++)P.push({x:lane(),y:Math.random()*-innerHeight,r:4+Math.random()*4,v:.35+Math.random()*.6,a:Math.random()*6,w:.01+Math.random()*.02,c:cols[i%4]});
-    (function loop(){
+    for(i=0;i<18;i++)D.push({x:lane(),y:Math.random()*innerHeight,r:.8+Math.random()*1.6,v:.12+Math.random()*.3,a:Math.random()*6,w:.02+Math.random()*.03});
+    if(burst)for(i=0;i<90;i++){ var an=Math.random()*6.283, sp=2+Math.random()*7; B.push({x:W/2,y:H/2,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp-1.5,r:1+Math.random()*2.6,l:1,f:.012+Math.random()*.014}) }
+    var last=0;
+    (function loop(now){
+      var dt=Math.min(((now||0)-last)/16.7,6)||1; last=now||0;
       if(!document.hidden){
         x.clearRect(0,0,W,H);
         P.forEach(function(p){
@@ -705,6 +808,18 @@ html[data-skin="ivory"] .fab #skin{background:linear-gradient(135deg,#4b0f19 0 5
           x.save(); x.translate(p.x,p.y); x.rotate(p.a); x.globalAlpha=.75; x.fillStyle=p.c;
           x.beginPath(); x.ellipse(0,0,p.r,p.r*.55,0,0,7); x.fill(); x.restore();
         });
+        x.fillStyle='#f3dd9a';
+        D.forEach(function(d){
+          d.y-=d.v; d.a+=d.w; d.x+=Math.sin(d.a)*.25;
+          if(d.y<-6){ d.y=H+6; d.x=lane() }
+          x.globalAlpha=.25+.55*Math.abs(Math.sin(d.a*1.7)); x.beginPath(); x.arc(d.x,d.y,d.r,0,7); x.fill();
+        });
+        B=B.filter(function(b){ return b.l>0 });
+        B.forEach(function(b){
+          b.x+=b.vx*dt; b.y+=b.vy*dt; b.vy+=.12*dt; b.vx*=.985; b.l-=b.f*dt;
+          x.globalAlpha=Math.max(b.l,0); x.fillStyle=(b.r>2.4?'#fff3c4':'#e9cb7a'); x.beginPath(); x.arc(b.x,b.y,b.r,0,7); x.fill();
+        });
+        x.globalAlpha=1;
       }
       requestAnimationFrame(loop);
     })();
